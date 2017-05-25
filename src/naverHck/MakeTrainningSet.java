@@ -15,16 +15,15 @@ import java.util.List;
 import java.util.Set;
 
 public class MakeTrainningSet {
-	private int[] catNum = { 5000, 5000, 4999, 3428, 5000, 3963, 5000, 5000, 5000, 5000, 5000, 3723, 4999 };
 	
 	public void makingSet(String fileName, HashMap<String, Integer> indexMap, float ResultChi[],
-			List<Pair<String, Float>> ChiList, int numOfCategory, String fileN) throws IOException {
+			List<Pair<String, Float>> ChiList, int numOfCategory, String fileN, int[] catNum) throws IOException {
 
 		
 		File outputFile = new File(fileN);
 		FileWriter fWriter = new FileWriter(outputFile, false);
 		BufferedReader reader = new BufferedReader(
-				new InputStreamReader(new FileInputStream("shopping-ca-cls.data.tsv"), "UTF-8"));
+				new InputStreamReader(new FileInputStream(fileName), "UTF-8"));
 
 			String line = null;
 			String[] splitWord = null;
@@ -58,8 +57,10 @@ public class MakeTrainningSet {
 				
 				for (int k = 0; k < splitWord.length - cnt; k++) {
 					if (!s.contains(arr.get(k) + 1)) {
-						s.add(arr.get(k) + 1);
-						rbuffer += (arr.get(k) + 1) + ":" + ResultChi[arr.get(k)] + " ";
+						if (ResultChi[arr.get(k)] != 0.0) {
+							s.add(arr.get(k) + 1);
+							rbuffer += (arr.get(k) + 1) + ":" + ResultChi[arr.get(k)] + " ";
+						}
 					}
 				}
 				if (rbuffer.length() != 0) {

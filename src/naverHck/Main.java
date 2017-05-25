@@ -7,7 +7,11 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
+
 public class Main {
+	private static int[] catNum = { 5000, 5000, 4999, 3428, 5000, 3963, 5000, 5000, 5000, 5000, 5000, 3723, 4999 };
+	private static int[] catNum2 = { 100, 100, 100, 100, 100, 17, 100, 100, 100, 100, 37, 58, 100};
+	
 	private static HashMap<Integer, Integer> numOfCatFeature;
 	private static List<HashMap<String, Integer>> catList;
 	private static List<Pair<String, Float>> ChiList = new ArrayList<Pair<String, Float>>();
@@ -27,8 +31,11 @@ public class Main {
 
 		// for text 1~4 to make train set
 		MakeTrainningSet mkTrain = new MakeTrainningSet();
-		mkTrain.makingSet("output", initialMap, chiValues, ChiList, numOfCategory, "train.txt");
+		mkTrain.makingSet("shopping-ca-cls.data.tsv", initialMap, chiValues, ChiList, numOfCategory, "train.txt", catNum);
 		
+		
+		MakeTrainningSet mkTest = new MakeTrainningSet();
+		mkTest.makingSet("shopping-ca-cls.data.test.tsv", initialMap, chiValues, ChiList, numOfCategory, "test.txt", catNum2);
 	}
 
 	public static void preProcessing() {

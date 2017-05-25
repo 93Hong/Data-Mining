@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -41,7 +42,7 @@ public class RemoveDuplication {
 				splitWords = line.split("\t")[6].replaceAll("[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]", " ").split(" ");
 				
 				catList = new HashSet<String>();
-				
+				splitWords = new HashSet<String>(Arrays.asList(splitWords)).toArray(new String[0]);
 				for (int i=0; i<splitWords.length; i++) {
 					if (splitWords[i].length() > 1) {
 						allFeature.add(splitWords[i]);
